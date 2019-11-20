@@ -2,6 +2,8 @@ import React from 'react';
 import '../App.css';
 import Axios from 'axios';
 
+import Assessments from '../components/assessments'
+
 class Read extends React.Component {
 
     state = {
@@ -21,7 +23,7 @@ class Read extends React.Component {
     render() {
         return (
             <div>
-                <h1>DEBUG - READ COMPONENT</h1>
+                <Assessments myAssessments={this.state.Assessments}></Assessments>
             </div>
         );
     }

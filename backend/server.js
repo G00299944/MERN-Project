@@ -37,3 +37,16 @@ app.get("/api/assessments", (req, res) => {
         res.json({assessments:data});
     })
 })
+
+app.post('/api/assessments', (req, res) => {
+    console.log(req.body);
+
+    AssessmentModel.create({
+        name: req.body.name,
+        subject: req.body.subject,
+        weight: req.body.weight,
+        grade: req.body.grade
+    });
+
+    res.json("DEBUG - DATA UPLOADED");
+})
