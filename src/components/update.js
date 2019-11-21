@@ -35,7 +35,6 @@ class Update extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    alert(this.state.Grade);
     const newAssessment = {
       name: this.state.Name,
       subject: this.state.Subject,
