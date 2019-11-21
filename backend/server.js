@@ -5,7 +5,7 @@ const path = require('path'); //this gets the current directory
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 
-const mongodb = "mongodb+srv://fred:fred@cluster0-9zu60.mongodb.net/test?retryWrites=true&w=majority";
+const mongodb = "mongodb+srv://fred:fred@cluster0-9zu60.mongodb.net/assessments?retryWrites=true&w=majority";
 mongoose.connect(mongodb, {useNewUrlParser:true});
 
 const cors = require('cors'); app.use(cors());
@@ -32,13 +32,10 @@ const AssessmentModel = mongoose.model("assessment", assessmentSchema);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-app.get("/api/assessments", (req, res) => {
-    AssessmentModel.find((error, data) => {
-        res.json({assessments:data});
-    })
-})
 
-app.post('/api/assessments', (req, res) => {
+
+// == CREATE ==
+app.post('/api/assessments', (req, res) => { 
     console.log(req.body);
 
     AssessmentModel.create({
@@ -50,3 +47,29 @@ app.post('/api/assessments', (req, res) => {
 
     res.json("DEBUG - DATA UPLOADED");
 })
+
+// == READ ==
+app.get("/api/assessments", (req, res) => { 
+    AssessmentModel.find((error, data) => {
+        res.json({assessments:data});
+    })
+})
+
+// == UPDATE ==
+app.get("/api/assessments/:id", (req, res) => {
+    console.log(req.params.id);
+
+    AssessmentModel.findById(req.params.id, (error, data) => {
+        res.json(data);
+    })
+})
+
+app.put('/api/assessments/:id', (req, res) => {
+    console.log("UPDATE: " + req.params.id);
+    console.log(req.body);
+
+    AssessmentModel.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, data) => {
+        res.json(data);
+    })
+})
+

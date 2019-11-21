@@ -16,7 +16,7 @@ function App() {
       <Switch>
           <Route path="/create" component={Create} />
           <Route path="/read" component={Read} />
-          <Route path="/update" component={Update} />
+          <Route path="/update/:id" component={Update} />
         </Switch>
     </div>
 
