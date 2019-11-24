@@ -6,63 +6,51 @@ class Update extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {Name: '', Subject: '', Weight: '', Grade: '', _id: ''};
+    this.state = {
+      Name: '',
+      Credits: 0,
+      _id: ''
+    };
 
-    this.handleChangedAssessmentName = this.handleChangedAssessmentName.bind(this);
-    this.handleChangedAssessmentSubject = this.handleChangedAssessmentSubject.bind(this);
-    this.handleChangedAssessmentWeight = this.handleChangedAssessmentWeight.bind(this);
-    this.handleChangedAssessmentGrade = this.handleChangedAssessmentGrade.bind(this);
+    this.handleChangedSubjectName = this.handleChangedSubjectName.bind(this);    
+    this.handleChangedSubjectCredits = this.handleChangedSubjectCredits.bind(this);
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChangedAssessmentName(e) {
+  handleChangedSubjectName(e) {
     this.setState({Name: e.target.value});
   }
 
-  handleChangedAssessmentSubject(e) {
-    this.setState({Subject: e.target.value});
-  }
-
-  handleChangedAssessmentWeight(e) {
-    this.setState({Weight: e.target.value})
-  }
-
-  handleChangedAssessmentGrade(e) {
-    this.setState({Grade: e.target.value})
+  handleChangedSubjectCredits(e) {
+    this.setState({Credits: e.target.value});
   }
 
   handleSubmit(e) {
     e.preventDefault();
 
-    const newAssessment = {
+    const newSubject = {
       name: this.state.Name,
-      subject: this.state.Subject,
-      weight: this.state.Weight,
-      grade: this.state.Grade
+      credits: this.state.Credits
     }
 
-    Axios.put("http://localhost:4000/api/assessments/" + this.state._id, newAssessment)
+    Axios.put("http://localhost:4000/api/subjects/" + this.state._id, newSubject)
       .then()
       .catch();
 
     this.setState({
       Name: '',
-      Subject: '',
-      Weight: 0,
-      Grade: 0
+      Credits: 0
     })
   }
 
   componentDidMount() {
-    Axios.get('http://localhost:4000/api/assessments/' + this.props.match.params.id)
+    Axios.get('http://localhost:4000/api/subjects/' + this.props.match.params.id)
       .then((response) => {
         this.setState({
           _id: response.data._id,
           Name: response.data.name,
-          Subject: response.data.subject,
-          Weight: response.data.weight,
-          Grade: response.data.grade
+          Credits: response.data.credits
         })
       })
       .catch();
@@ -74,20 +62,12 @@ class Update extends React.Component {
         <h1>DEBUG - UPDATE COMPONENT</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label>Assessment:</label>
-            <input type="text" className="form-control" value={this.state.Name} onChange={this.handleChangedAssessmentName} />
+            <label>Subject:</label>
+            <input type="text" className="form-control" value={this.state.Name} onChange={this.handleChangedSubjectName} />
           </div>
           <div className="form-group">
-            <label>Module:</label>
-            <input type="text" className="form-control" value={this.state.Subject} onChange={this.handleChangedAssessmentSubject} />
-          </div>
-          <div className="form-group">
-            <label>Weight:</label>
-            <input type="text" className="form-control" value={this.state.Weight} onChange={this.handleChangedAssessmentWeight} />
-          </div>
-          <div className="form-group">
-            <label>Grade:</label>
-            <input type="text" className="form-control" value={this.state.Grade} onChange={this.handleChangedAssessmentGrade} />
+            <label>Credits:</label>
+            <input type="text" className="form-control" value={this.state.Subject} onChange={this.handleChangedSubjectCredits} />
           </div>
           <input type="submit" value="Submit" />
         </form>

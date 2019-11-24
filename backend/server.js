@@ -21,105 +21,50 @@ app.use(bodyParser.json());
 
 const Schema = mongoose.Schema;
 
-const assessmentSchema = new Schema({
-    name:String,
-    subject:String,
-    weight:Number,
-    grade:Number
-});
+const subjectSchema = new Schema( {
+    name: String,
+    credits: Number
+})
 
-const userSchema = new Schema( {
-    username:String,
-    password:String
-    //TODO: embed subjects and assessments here?
-});
-
-const AssessmentModel = mongoose.model("assessment", assessmentSchema);
-const UserModel = mongoose.model("user", userSchema);
+const SubjectModel = mongoose.model("subject", subjectSchema);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-// == REGISTER == https://medium.com/@Keithweaver_/building-a-log-in-system-for-a-mern-stack-39411e9513bd
-// app.post('/reg/', (req, res, next) => {
-//     const {body} = req;
-//     const {
-//         password
-//     } = body;
-
-//     if (!)
-// })
-
-// app.get('/reg/:username', (req, res) => {
-//     UserModel.exists(req.params.username), (err, res) => {
-//         res.json(data);
-//     }
-// })
-// app.post('/reg/', (req, res) => {
-
-//     //console.log(UserModel.exists({username: req.params.username}))
-//     // if(UserModel.exists({username: req.params.username}) == true) {
-//     //     console.log("FOUND");
-//     // }
-//     // else {
-//     //     console.log("NOT FOUND");
-//     // }
-
-
-//     // UserModel.find({username: req.params.username}, (error, data) => {
-//     //     if(error) {
-//     //         console.log("ERROR NOT FOUND?");
-//     //         res.json(error);
-//     //     }
-//     //     else {
-//     //         console.log("USER FOUND?" + data);
-//     //         res.json(data)
-//     //     }
-//     // })
-
-//     // UserModel.create({
-//     //     username: req.body.username,
-//     //     password: req.body.password
-//     // });
-
-//     //res.json("DEBUG - NEW USER REGISTERED");
-// })
-
 // == CREATE ==
-app.post('/api/assessments', (req, res) => { 
-    AssessmentModel.create({
+app.post('/api/subjects', (req, res) => { 
+    SubjectModel.create({
         name: req.body.name,
-        subject: req.body.subject,
-        weight: req.body.weight,
-        grade: req.body.grade
+        credits: req.body.credits
     });
 
     res.json("DEBUG - DATA UPLOADED");
 })
 
 // == READ ==
-app.get("/api/assessments", (req, res) => { 
-    AssessmentModel.find((error, data) => {
-        res.json({assessments:data});
+app.get("/api/subjects", (req, res) => { 
+    SubjectModel.find((error, data) => {
+        res.json({subjects:data});
     })
 })
 
 // == UPDATE ==
-app.get("/api/assessments/:id", (req, res) => {
-    AssessmentModel.findById(req.params.id, (error, data) => {
+app.get("/api/subjects/:id", (req, res) => {
+    SubjectModel.findById(req.params.id, (error, data) => {
         res.json(data);
+        console.log("boom");
     })
 })
 
-app.put('/api/assessments/:id', (req, res) => {
-    AssessmentModel.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, data) => {
+app.put('/api/subjects/:id', (req, res) => {
+    SubjectModel.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, data) => {
         res.json(data);
     })
 })
 
 // == DELETE ==
-app.delete("/api/assessments/:id", (req, res) => {
+app.delete("/api/subjects/:id", (req, res) => {
     console.log(req.params.id);
-    AssessmentModel.deleteOne({_id: req.params.id}, (error, data) => {
+    SubjectModel.deleteOne({_id: req.params.id}, (error, data) => {
         if(error) {
             res.json(error);
         }
@@ -128,7 +73,5 @@ app.delete("/api/assessments/:id", (req, res) => {
         }
     })
 })
-
-// == LOGIN == 
 
 

@@ -2,18 +2,18 @@ import React from 'react';
 import '../App.css';
 import Axios from 'axios';
 
-import Assessments from '../components/assessments'
+import Subjects from './subjects';
 
 class Read extends React.Component {
 
     state = {
-        Assessments: []
+        Subjects: []
     };
 
     componentDidMount() {
-        Axios.get("http://localhost:4000/api/assessments")
+        Axios.get("http://localhost:4000/api/subjects")
         .then((res) => {
-            this.setState({Assessments: res.data.assessments})
+            this.setState({Subjects: res.data.subjects})
         })
         .catch((err) => {
             console.log(err);
@@ -23,7 +23,8 @@ class Read extends React.Component {
     render() {
         return (
             <div>
-                <Assessments myAssessments={this.state.Assessments}></Assessments>
+                <h1>DEBUG - READ COMPONENT</h1>
+                <Subjects mySubjects={this.state.Subjects}></Subjects>
             </div>
         );
     }
