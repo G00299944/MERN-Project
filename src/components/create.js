@@ -8,7 +8,7 @@ class Create extends React.Component {
         super(props);
         this.state = {
             Name: '',
-            Credits: 0,
+            Credits: '',
             Assessments: []
         }
         
@@ -41,7 +41,7 @@ class Create extends React.Component {
 
         this.setState({
             Name: '',
-            Credits: 0,
+            Credits: '',
             Assessments: []
         })
     }

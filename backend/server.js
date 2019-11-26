@@ -23,7 +23,9 @@ const Schema = mongoose.Schema;
 
 const subjectSchema = new Schema( {
     name: String,
-    credits: Number
+    credits: Number,
+    grade: Number,
+    Assessments
 })
 
 const SubjectModel = mongoose.model("subject", subjectSchema);
