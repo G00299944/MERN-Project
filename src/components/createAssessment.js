@@ -7,30 +7,36 @@ class CreateAssessment extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            Name: '',
-            Credits: 0,
-            Assessments: [
-                {
-                    AssessmentName: '',
-                    Weight: 0,
-                    Grade: 0
-                }
-            ]
-        }
+            Title: '',
+            Weight: ''
+        };
+        
+        this.handleChangedAssessmentTitle = this.handleChangedAssessmentTitle.bind(this);
+        this.handleChangedAssessmentWeight = this.handleChangedAssessmentWeight.bind(this);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChangedAssessmentName(e) {
-        this.setState({Assessments: e.state.Assessments.AssessmentName});
-        console.log(e.state.Assessments.AssessmentName);
+    handleChangedAssessmentTitle(e) {
+        this.setState({ Title: e.target.value });
+    }
+
+    handleChangedAssessmentWeight(e) {
+        this.setState({ Weight: e.target.value });
     }
 
     handleSubmit(e) {
         e.preventDefault();
         const newAssessment = {
-            AssessmentName: this.state.Assessments.AssessmentName
+            title: this.state.Title,
+            weight: this.state.Weight
         }
-
         console.log(newAssessment);
+
+        this.setState({
+            Title: '',
+            Credits: ''
+        })
     }
 
     render() {
@@ -39,21 +45,13 @@ class CreateAssessment extends React.Component {
                 <h1>DEBUG - CREATE ASSESSMENT COMPONENT</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label>Assessment:</label>
-                        <input type="text" className="form-control" value={this.state.Assessments.AssessmentName} onChange={this.handleChangedAssessmentName} />
-                    </div>
-                    {/* <div className="form-group">
-                        <label>Date:</label>
-                        <input type="text" className="form-control" value={this.state.Subject} onChange={this.handleChangedSubjectCredits} />
+                        <label>Assessment Name:</label>
+                        <input type="text" className="form-control" value={this.state.Title} onChange={this.handleChangedAssessmentTitle} />
                     </div>
                     <div className="form-group">
-                        <label>Weight:</label>
-                        <input type="text" className="form-control" value={this.state.Subject} onChange={this.handleChangedSubjectCredits} />
+                        <label>Assessment Weight:</label>
+                        <input type="text" className="form-control" value={this.state.Weight} onChange={this.handleChangedAssessmentWeight} />
                     </div>
-                    <div className="form-group">
-                        <label>Grade:</label>
-                        <input type="text" className="form-control" value={this.state.Subject} onChange={this.handleChangedSubjectCredits} />
-                    </div> */}
                     <input type="submit" value="Submit" />
                 </form>
             </div>

@@ -9,7 +9,8 @@ class Update extends React.Component {
     this.state = {
       Name: '',
       Credits: 0,
-      _id: ''
+      _id: '',
+      Assessments: []
     };
 
     this.handleChangedSubjectName = this.handleChangedSubjectName.bind(this);    
@@ -33,6 +34,12 @@ class Update extends React.Component {
       name: this.state.Name,
       credits: this.state.Credits
     }
+
+    // const newAssessment = {
+    //   title
+    // }
+
+    newSubject.Assessments.push(newAssessment);
 
     Axios.put("http://localhost:4000/api/subjects/" + this.state._id, newSubject)
       .then()

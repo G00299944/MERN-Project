@@ -12,6 +12,7 @@ class SubjectItem extends React.Component {
                 {/* <h1>SUBJECT_ITEM COMPONENT</h1> */}
                 <p>{this.props.subject.Title}</p>
                 <Assessments myAssessments={this.props.subject.Assessments}></Assessments>
+                <Link to={"/createAssessment/" + this.props.subject._id} className="btn btn-primary">Add Assessment</Link>
                 <hr></hr>
             </div>
             

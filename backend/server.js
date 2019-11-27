@@ -22,10 +22,10 @@ app.use(bodyParser.json());
 const Schema = mongoose.Schema;
 
 const subjectSchema = new Schema( {
-    name: String,
-    credits: Number,
-    grade: Number,
-    Assessments
+    Title: String,
+    Credits: Number,
+    //grade: Number,
+    Assessments: []
 })
 
 const SubjectModel = mongoose.model("subject", subjectSchema);
@@ -35,8 +35,8 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 // == CREATE ==
 app.post('/api/subjects', (req, res) => { 
     SubjectModel.create({
-        name: req.body.name,
-        credits: req.body.credits
+        Title: req.body.title,
+        Credits: req.body.credits
     });
 
     res.json("DEBUG - DATA UPLOADED");

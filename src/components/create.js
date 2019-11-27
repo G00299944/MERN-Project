@@ -7,31 +7,39 @@ class Create extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            Name: '',
+            Title: '',
             Credits: '',
+            AssessmentsCount: 0,
             Assessments: []
         }
         
-        this.handleChangedSubjectName = this.handleChangedSubjectName.bind(this);
+        this.handleChangedSubjectTitle = this.handleChangedSubjectTitle.bind(this);
         this.handleChangedSubjectCredits = this.handleChangedSubjectCredits.bind(this);
+        // //this.handleChangedSubjectAssessmentsCount = this.handleChangedSubjectAssessmentsCount.bind(this);
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
-    handleChangedSubjectName(e) {
-        this.setState({ Name: e.target.value });
+    handleChangedSubjectTitle(e) {
+        this.setState({ Title: e.target.value });
     }
     handleChangedSubjectCredits(e) {
         this.setState({ Credits: e.target.value });
     }
+    // handleChangedSubjectAssessmentsCount(e) {
+    //     this.setState({AssessmentsCount: e.target.value});
+    // }
 
     handleSubmit(e) {
         e.preventDefault();
 
         const newSubject = {
-            name: this.state.Name,
-            credits: this.state.Credits
+            title: this.state.Title,
+            credits: this.state.Credits,
+            //assessmentsCount: this.state.AssessmentsCount,
+            
+            
         }
 
         console.log(newSubject);
@@ -40,9 +48,9 @@ class Create extends React.Component {
             .catch();
 
         this.setState({
-            Name: '',
-            Credits: '',
-            Assessments: []
+            Title: '',
+            Credits: ''
+            //AssessmentsCount: ''
         })
     }
 
@@ -52,13 +60,17 @@ class Create extends React.Component {
                 <h1>DEBUG - CREATE COMPONENT</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label>Subject:</label>
-                        <input type="text" className="form-control" value={this.state.Name} onChange={this.handleChangedSubjectName} />
+                        <label>Module Title:</label>
+                        <input type="text" className="form-control" value={this.state.Title} onChange={this.handleChangedSubjectTitle} />
                     </div>
                     <div className="form-group">
                         <label>Credits:</label>
-                        <input type="text" className="form-control" value={this.state.Subject} onChange={this.handleChangedSubjectCredits} />
+                        <input type="text" className="form-control" value={this.state.Credits} onChange={this.handleChangedSubjectCredits} />
                     </div>
+                    {/* <div className="form-group">
+                        <label>No. of Assessments:</label>
+                        <input type="text" className="form-control" value={this.state.AssessmentsCount} onChange={this.handleChangedSubjectAssessmentsCount} />
+                    </div> */}
                     <input type="submit" value="Submit" />
                 </form>
             </div>

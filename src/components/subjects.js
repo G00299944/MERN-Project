@@ -7,6 +7,7 @@ class Subjects extends React.Component {
 
     render() {
         return this.props.mySubjects.map((subject) => {
+            console.log(subject);
             return <SubjectItem subject={subject}></SubjectItem>
         })
     }
