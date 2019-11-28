@@ -5,6 +5,7 @@ import Axios from 'axios';
 class CreateAssessment extends React.Component {
 
     constructor(props) {
+        console.log(props);
         super(props);
         this.state = {
             Title: '',
@@ -27,11 +28,11 @@ class CreateAssessment extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const newAssessment = {
-            title: this.state.Title,
-            weight: this.state.Weight
-        }
-        console.log(newAssessment);
+        // const newAssessment = {
+        //     title: this.state.Title,
+        //     weight: this.state.Weight
+        // }
+        //console.log(newAssessment);
 
         this.setState({
             Title: '',

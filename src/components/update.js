@@ -39,7 +39,7 @@ class Update extends React.Component {
     //   title
     // }
 
-    newSubject.Assessments.push(newAssessment);
+    //newSubject.Assessments.push(newAssessment);
 
     Axios.put("http://localhost:4000/api/subjects/" + this.state._id, newSubject)
       .then()
