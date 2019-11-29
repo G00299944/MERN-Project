@@ -35,24 +35,34 @@ class CreateAssessment extends React.Component {
 
 
         const newAssessment = {
-            title: this.state.AssessmentTitle,
-            weight: this.state.AssessmentWeight
+            Title: this.state.AssessmentTitle,
+            Weight: this.state.AssessmentWeight
         }
 
         const newSubject = {
-            name: this.state.Name,
-            credits: this.state.Credits,
-            assessments: this.state.Assessments
+            Title: this.state.Title,
+            Credits: this.state.Credits,
+            Assessments: this.state.Assessments
         }
         //console.log(newSubject);
 
-        newSubject.assessments.push(newAssessment);
+        //var arraySize = newSubject.assessments.push(newAssessment);
+
+        //newSubject.assessments[arraySize] = newAssessment;
 
         //console.log(newSubject);
 
+        //console.log(newSubject.assessments.push(newAssessment));
+
+
+        newSubject.Assessments.push(newAssessment)
+
+
+        console.log(newSubject);
+
         
 
-        Axios.put("http://localhost:4000/api/subjects/" + this.state._id, newSubject)
+        Axios.patch("http://localhost:4000/api/subjects/" + this.state._id, newSubject)
         .then()
         .catch();
 
@@ -73,10 +83,11 @@ class CreateAssessment extends React.Component {
           .then((response) => {
             this.setState({
                 _id: response.data._id,
-                Name: response.data.name,
-                Credits: response.data.credits,
+                Title: response.data.Title,
+                Credits: response.data.Credits,
                 Assessments: response.data.Assessments
               })
+              //console.log(this.state);
           })
           .catch();
       }

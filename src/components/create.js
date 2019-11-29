@@ -15,7 +15,6 @@ class Create extends React.Component {
         
         this.handleChangedSubjectTitle = this.handleChangedSubjectTitle.bind(this);
         this.handleChangedSubjectCredits = this.handleChangedSubjectCredits.bind(this);
-        // //this.handleChangedSubjectAssessmentsCount = this.handleChangedSubjectAssessmentsCount.bind(this);
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -27,9 +26,6 @@ class Create extends React.Component {
     handleChangedSubjectCredits(e) {
         this.setState({ Credits: e.target.value });
     }
-    // handleChangedSubjectAssessmentsCount(e) {
-    //     this.setState({AssessmentsCount: e.target.value});
-    // }
 
     handleSubmit(e) {
         e.preventDefault();
