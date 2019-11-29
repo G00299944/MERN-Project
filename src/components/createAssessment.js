@@ -5,12 +5,15 @@ import Axios from 'axios';
 class CreateAssessment extends React.Component {
 
     constructor(props) {
-        console.log(props);
         super(props);
         this.state = {
+            _id: '',
             Title: '',
-            Weight: ''
-        };
+            Credits: 0,
+            Assessments: [],
+            AssessmentTitle: '',
+            AssessmentWeight: 0
+          };
         
         this.handleChangedAssessmentTitle = this.handleChangedAssessmentTitle.bind(this);
         this.handleChangedAssessmentWeight = this.handleChangedAssessmentWeight.bind(this);
@@ -19,26 +22,64 @@ class CreateAssessment extends React.Component {
     }
 
     handleChangedAssessmentTitle(e) {
-        this.setState({ Title: e.target.value });
+        this.setState({ AssessmentTitle: e.target.value });
     }
 
     handleChangedAssessmentWeight(e) {
-        this.setState({ Weight: e.target.value });
+        this.setState({ AssessmentWeight: e.target.value });
     }
 
     handleSubmit(e) {
+        
         e.preventDefault();
-        // const newAssessment = {
-        //     title: this.state.Title,
-        //     weight: this.state.Weight
-        // }
+
+
+        const newAssessment = {
+            title: this.state.AssessmentTitle,
+            weight: this.state.AssessmentWeight
+        }
+
+        const newSubject = {
+            name: this.state.Name,
+            credits: this.state.Credits,
+            assessments: this.state.Assessments
+        }
+        //console.log(newSubject);
+
+        newSubject.assessments.push(newAssessment);
+
+        //console.log(newSubject);
+
+        
+
+        Axios.put("http://localhost:4000/api/subjects/" + this.state._id, newSubject)
+        .then()
+        .catch();
+
+
         //console.log(newAssessment);
+        //parentSubjectObject.assessments.push(newAssessment);
+
+        //console.log(parentSubjectObject);
 
         this.setState({
-            Title: '',
-            Credits: ''
+            AssessmentTitle: '',
+            AssessmentWeight: ''
         })
     }
+
+    componentDidMount() {
+        Axios.get('http://localhost:4000/api/subjects/' + this.props.match.params.id)
+          .then((response) => {
+            this.setState({
+                _id: response.data._id,
+                Name: response.data.name,
+                Credits: response.data.credits,
+                Assessments: response.data.Assessments
+              })
+          })
+          .catch();
+      }
 
     render() {
         return (
@@ -47,11 +88,11 @@ class CreateAssessment extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label>Assessment Name:</label>
-                        <input type="text" className="form-control" value={this.state.Title} onChange={this.handleChangedAssessmentTitle} />
+                        <input type="text" className="form-control" value={this.state.AssessmentTitle} onChange={this.handleChangedAssessmentTitle} />
                     </div>
                     <div className="form-group">
                         <label>Assessment Weight:</label>
-                        <input type="text" className="form-control" value={this.state.Weight} onChange={this.handleChangedAssessmentWeight} />
+                        <input type="text" className="form-control" value={this.state.AssessmentWeight} onChange={this.handleChangedAssessmentWeight} />
                     </div>
                     <input type="submit" value="Submit" />
                 </form>

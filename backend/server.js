@@ -53,13 +53,14 @@ app.get("/api/subjects", (req, res) => {
 app.get("/api/subjects/:id", (req, res) => {
     SubjectModel.findById(req.params.id, (error, data) => {
         res.json(data);
-        console.log("boom");
+        //console.log("boom");
     })
 })
 
 app.put('/api/subjects/:id', (req, res) => {
     SubjectModel.findByIdAndUpdate(req.params.id, req.body, {new: true}, (error, data) => {
         res.json(data);
+        console.log("boom!");
     })
 })
 
